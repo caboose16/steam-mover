@@ -48,14 +48,15 @@ class SteamLibrary:
                     path = dir_ + '\\' + game.app_manifest
                     file = open(path, 'r') 
                     lines = file.readlines()
-                    name = lines[4]
-                    game.name = re.findall('"([^"]*)"', name)[1]
-                    install_dir = lines[6]
-                    game.install_dir = re.findall('"([^"]*)"', install_dir)[1]
-                    size = lines[9]
-                    game.size = int(re.findall('"([^"]*)"', size)[1])
+                    if len(lines) >= 4:
+                        name = lines[4]
+                        game.name = re.findall('"([^"]*)"', name)[1]
+                        install_dir = lines[6]
+                        game.install_dir = re.findall('"([^"]*)"', install_dir)[1]
+                        size = lines[9]
+                        game.size = int(re.findall('"([^"]*)"', size)[1])
 
-                    glist.append(game)
+                        glist.append(game)
 
     # TODO: Make funnction that moves game from one directory to another
     # Userinput '[src_dir#] [des_dir#] [appid]'
